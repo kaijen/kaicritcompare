@@ -1,0 +1,8 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/diff.ts", "src/criticmarkup.ts", "src/compare.ts", "src/extension.ts"],
+  "out": "docs",
+  "exclude": ["**/*.test.ts"],
+  "name": "kaicritcompare",
+  "readme": "README.md"
+}

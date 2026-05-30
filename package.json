@@ -23,11 +23,14 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && node --test out/*.test.js",
+    "docs": "typedoc"
   },
   "devDependencies": {
     "@types/vscode": "^1.85.0",
     "@types/node": "^18.0.0",
+    "typedoc": "^0.25.0",
     "typescript": "^5.3.0"
   },
   "contributes": {

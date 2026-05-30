@@ -1,10 +1,14 @@
 .vscode/**
 .github/**
 src/**
+docs/**
 node_modules/**
 .gitignore
 .vscodeignore
 tsconfig.json
+typedoc.json
 CLAUDE.md
+out/**/*.test.js
+out/**/*.test.js.map
 **/*.map
 **/*.ts
