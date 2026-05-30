@@ -2,11 +2,12 @@
 .github/**
 src/**
 docs/**
+site/**
 node_modules/**
 .gitignore
 .vscodeignore
 tsconfig.json
-typedoc.json
+mkdocs.yml
 CLAUDE.md
 out/**/*.test.js
 out/**/*.test.js.map

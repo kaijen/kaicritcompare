@@ -18,17 +18,24 @@ distribution via GitHub Releases.
 npm install        # install dev deps (@types/vscode, @types/node, typescript)
 npm run compile    # tsc -p ./  →  emits to out/
 npm run watch      # incremental recompile
+npm test           # compile, then `node --test out/*.test.js`
 ```
 
-There is no test runner wired up yet. The diff engine is pure (no `vscode`
-imports), so verify it directly against the compiled output, e.g.:
-
-```sh
-node -e 'const {diff}=require("./out/diff");const {render}=require("./out/criticmarkup");console.log(render(diff("a b c","a x c","word",true)))'
-```
+Tests use Node's built-in runner (`node:test`); the `*.test.ts` files live in
+`src/` and compile alongside the sources (they are excluded from the packaged
+`.vsix` via `.vscodeignore`). The diff/render code is pure (no `vscode`
+imports), so the suite exercises it directly — most importantly the
+reconstruction invariant (see below). The glob `out/*.test.js` is deliberate:
+`node --test out/` resolves the directory as a module on newer Node versions.
 
 To debug interactively, press **F5** (the "Run Extension" launch config compiles
 first, then opens an Extension Development Host).
+
+Docs are an MkDocs Material site under `docs/` (`mkdocs.yml` is the config),
+matching kaicrit. Preview locally with `pip install mkdocs-material mike` then
+`mkdocs serve`. On a `v*` tag, `.github/workflows/docs.yml` deploys a versioned
+build to the `gh-pages` branch via `mike`, and `build.yml` packages the `.vsix`
+and attaches it to the GitHub Release.
 
 ## Architecture
 
