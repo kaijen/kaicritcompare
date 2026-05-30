@@ -1,0 +1,127 @@
+{
+  "name": "kaicritcompare",
+  "displayName": "kaicritcompare — CriticMarkup Diff",
+  "description": "Compare two files and generate a CriticMarkup document describing how the first file becomes the second.",
+  "version": "0.1.0",
+  "publisher": "0x2e6b6169",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "criticmarkup",
+    "diff",
+    "compare",
+    "track changes",
+    "kaicrit"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.3.0"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "kaicritcompare.compare",
+        "title": "Compare Two Files → CriticMarkup",
+        "category": "kaicritcompare"
+      },
+      {
+        "command": "kaicritcompare.compareActiveFileWith",
+        "title": "Compare Active File With… → CriticMarkup",
+        "category": "kaicritcompare"
+      },
+      {
+        "command": "kaicritcompare.selectForCompare",
+        "title": "Select for CriticMarkup Compare",
+        "category": "kaicritcompare"
+      },
+      {
+        "command": "kaicritcompare.compareWithSelected",
+        "title": "Compare with Selected → CriticMarkup",
+        "category": "kaicritcompare"
+      },
+      {
+        "command": "kaicritcompare.compareSelected",
+        "title": "Compare Selected Files → CriticMarkup",
+        "category": "kaicritcompare"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "kaicritcompare.selectForCompare",
+          "when": "false"
+        },
+        {
+          "command": "kaicritcompare.compareWithSelected",
+          "when": "false"
+        },
+        {
+          "command": "kaicritcompare.compareSelected",
+          "when": "false"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "kaicritcompare.selectForCompare",
+          "when": "!explorerResourceIsFolder",
+          "group": "3_compare@1"
+        },
+        {
+          "command": "kaicritcompare.compareWithSelected",
+          "when": "!explorerResourceIsFolder",
+          "group": "3_compare@2"
+        },
+        {
+          "command": "kaicritcompare.compareSelected",
+          "when": "!explorerResourceIsFolder && listDoubleSelection",
+          "group": "3_compare@3"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "kaicritcompare",
+      "properties": {
+        "kaicritcompare.granularity": {
+          "type": "string",
+          "enum": ["character", "word", "line"],
+          "enumDescriptions": [
+            "Diff character by character (most precise, noisiest output).",
+            "Diff word by word while preserving whitespace (recommended for prose).",
+            "Diff line by line (best for code and structured text)."
+          ],
+          "default": "word",
+          "description": "Granularity used when diffing the two files."
+        },
+        "kaicritcompare.combineSubstitutions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Merge an adjacent deletion and addition into a single CriticMarkup substitution {~~old~>new~~} instead of emitting separate {--old--}{++new++} markers."
+        },
+        "kaicritcompare.outputLanguage": {
+          "type": "string",
+          "enum": ["auto", "plaintext", "markdown"],
+          "enumDescriptions": [
+            "Use the language of the second (modified) file.",
+            "Always open the result as plain text.",
+            "Always open the result as Markdown."
+          ],
+          "default": "auto",
+          "description": "Language mode applied to the generated CriticMarkup document."
+        }
+      }
+    }
+  }
+}
