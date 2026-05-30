@@ -1,0 +1,30 @@
+site_name: kaicritcompare
+site_url: https://kaijen.github.io/kaicritcompare/
+repo_url: https://github.com/kaijen/kaicritcompare
+repo_name: kaijen/kaicritcompare
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - content.code.copy
+
+markdown_extensions:
+  - attr_list
+
+plugins:
+  - search
+  - mike:
+      alias_type: symlink
+      canonical_version: latest
+      version_selector: true
+
+extra:
+  version:
+    provider: mike
+
+nav:
+  - Overview: index.md
+  - Markup Types: markup.md
+  - Usage: usage.md
